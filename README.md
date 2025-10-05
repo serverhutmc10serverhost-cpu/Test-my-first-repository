@@ -1,22 +1,43 @@
 # 🧮 Web Calculator
 
-Simple calculator built with HTML, CSS, and JavaScript.
+A modern calculator made only with HTML, CSS, and JavaScript.
 
-Currently at version: **v2.0**
-
-### ✅ Direct link:
-
+📌 Direct link:
 🔗 [Open Web Calculator](https://serverhutmc10serverhost-cpu.github.io/Test-my-first-repository/)
 
 ---
 
-## 🆕 Latest update (v2.0)
-- Added version number visible in the interface.
-- Prepared for future versions and improvements.
+## 🚀 Current version: **v3.0** — Mega Mega Update
+
+The calculator has been completely improved. Here's what's new in version 3.0:
+
+### ✅ Changes in v3.0:
+- New **modern and responsive visual design**
+- **Dark/light mode** (🌗 with button)
+- **Physical keyboard support**
+- Added **⌫ delete** button (plus C for clear)
+- Support for **parentheses**
+- Smooth animations and UI improvements
+- Visible version number (top right corner)
 
 ---
 
-## 📌 Basic functions:
-- Addition, subtraction, multiplication, and division
-- Clear button (C)
-- Decimal support
+## 🔧 Available features:
+
+- Addition, subtraction, multiplication, division
+- Decimals
+- Physical and touch keyboard
+- Responsive: adapts to mobile, tablet, and desktop
+
+---
+
+## 📌 Upcoming ideas for v4.0:
+
+- Operation history
+- Scientific functions (√, %, ^, sin, cos, tan)
+- Sound or vibration on buttons
+- Animations Advanced
+
+---
+
+Thanks for visiting the project! If you like it, feel free to fork it, improve it, or share it. 😄
