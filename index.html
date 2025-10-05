@@ -1,88 +1,210 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Calculadora</title>
-    <style>
-        body {
-            font-family: Arial;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: #f0f0f0;
-        }
-        .calculadora {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #aaa;
-        }
-        #pantalla {
-            width: 100%;
-            height: 40px;
-            font-size: 24px;
-            margin-bottom: 10px;
-            text-align: right;
-            padding: 5px;
-        }
-        .boton {
-            width: 60px;
-            height: 60px;
-            font-size: 22px;
-            margin: 5px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora v3.0</title>
+  <style>
+    :root {
+      --bg: #f0f0f0;
+      --text: #222;
+      --btn: #fff;
+      --btn-hover: #e0e0e0;
+      --accent: #007BFF;
+    }
+
+    body.dark {
+      --bg: #1e1e1e;
+      --text: #f5f5f5;
+      --btn: #333;
+      --btn-hover: #444;
+      --accent: #0af;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .version {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .calculadora {
+      background: var(--btn);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 320px;
+      max-width: 90%;
+    }
+
+    #pantalla {
+      width: 100%;
+      font-size: 2rem;
+      text-align: right;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .fila {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .boton {
+      flex: 1;
+      margin: 3px;
+      padding: 20px;
+      font-size: 1.2rem;
+      background: var(--btn);
+      color: var(--text);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .boton:hover {
+      background: var(--btn-hover);
+    }
+
+    .fila .boton:last-child {
+      background: var(--accent);
+      color: white;
+    }
+
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .modo-btn {
+      font-size: 0.9rem;
+      padding: 5px 10px;
+      background: var(--btn);
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .modo-btn:hover {
+      background: var(--btn-hover);
+    }
+
+    @media (max-width: 400px) {
+      .boton {
+        padding: 15px;
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <body>
-<!-- Top-right corner version -->
-<div style="position: absolute; top: 10px; right: 15px; font-size: 14px; color: #555;">
-v2.0
-</div>
+  <div class="version">v3.0</div>
 
-<div class="calculadora">
-        <input type="text" id="pantalla" disabled>
-        <br>
-        <button class="boton" onclick="agregar('7')">7</button>
-        <button class="boton" onclick="agregar('8')">8</button>
-        <button class="boton" onclick="agregar('9')">9</button>
-        <button class="boton" onclick="agregar('/')">/</button><br>
+  <div class="calculadora">
+    <div class="top-controls">
+      <h2>Calculadora</h2>
+      <button class="modo-btn" onclick="toggleModo()">🌗 Modo</button>
+    </div>
+    <input type="text" id="pantalla" disabled />
 
-        <button class="boton" onclick="agregar('4')">4</button>
-        <button class="boton" onclick="agregar('5')">5</button>
-        <button class="boton" onclick="agregar('6')">6</button>
-        <button class="boton" onclick="agregar('*')">*</button><br>
-
-        <button class="boton" onclick="agregar('1')">1</button>
-        <button class="boton" onclick="agregar('2')">2</button>
-        <button class="boton" onclick="agregar('3')">3</button>
-        <button class="boton" onclick="agregar('-')">-</button><br>
-
-        <button class="boton" onclick="agregar('0')">0</button>
-        <button class="boton" onclick="agregar('.')">.</button>
-        <button class="boton" onclick="calcular()">=</button>
-        <button class="boton" onclick="agregar('+')">+</button><br>
-
-        <button class="boton" style="width: 250px;" onclick="limpiar()">C</button>
+    <div class="fila">
+      <button class="boton" onclick="limpiar()">C</button>
+      <button class="boton" onclick="borrar()">⌫</button>
+      <button class="boton" onclick="agregar('(')">(</button>
+      <button class="boton" onclick="agregar(')')">)</button>
     </div>
 
-    <script>
-        function agregar(valor) {
-            document.getElementById("pantalla").value += valor;
-        }
+    <div class="fila">
+      <button class="boton" onclick="agregar('7')">7</button>
+      <button class="boton" onclick="agregar('8')">8</button>
+      <button class="boton" onclick="agregar('9')">9</button>
+      <button class="boton" onclick="agregar('/')">/</button>
+    </div>
 
-        function limpiar() {
-            document.getElementById("pantalla").value = "";
-        }
+    <div class="fila">
+      <button class="boton" onclick="agregar('4')">4</button>
+      <button class="boton" onclick="agregar('5')">5</button>
+      <button class="boton" onclick="agregar('6')">6</button>
+      <button class="boton" onclick="agregar('*')">*</button>
+    </div>
 
-        function calcular() {
-            try {
-                document.getElementById("pantalla").value = eval(document.getElementById("pantalla").value);
-            } catch {
-                document.getElementById("pantalla").value = "Error";
-            }
-        }
-    </script>
+    <div class="fila">
+      <button class="boton" onclick="agregar('1')">1</button>
+      <button class="boton" onclick="agregar('2')">2</button>
+      <button class="boton" onclick="agregar('3')">3</button>
+      <button class="boton" onclick="agregar('-')">-</button>
+    </div>
+
+    <div class="fila">
+      <button class="boton" onclick="agregar('0')">0</button>
+      <button class="boton" onclick="agregar('.')">.</button>
+      <button class="boton" onclick="calcular()">=</button>
+      <button class="boton" onclick="agregar('+')">+</button>
+    </div>
+  </div>
+
+  <script>
+    const pantalla = document.getElementById("pantalla");
+
+    function agregar(valor) {
+      pantalla.value += valor;
+    }
+
+    function limpiar() {
+      pantalla.value = "";
+    }
+
+    function borrar() {
+      pantalla.value = pantalla.value.slice(0, -1);
+    }
+
+    function calcular() {
+      try {
+        pantalla.value = eval(pantalla.value);
+      } catch {
+        pantalla.value = "Error";
+      }
+    }
+
+    function toggleModo() {
+      document.body.classList.toggle("dark");
+    }
+
+    // Teclado físico
+    document.addEventListener("keydown", function (e) {
+      const tecla = e.key;
+      if ("0123456789+-*/().".includes(tecla)) {
+        agregar(tecla);
+      } else if (tecla === "Enter") {
+        calcular();
+      } else if (tecla === "Backspace") {
+        borrar();
+      } else if (tecla.toLowerCase() === "c") {
+        limpiar();
+      }
+    });
+  </script>
 </body>
 </html>
