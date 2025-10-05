@@ -1,2 +1,3 @@
 # Test-my-first-repository
 This is one test for 100 test...
+# Here I will be learning to program if you want to help me you will be welcome, I will do several projects until I do something I always wanted to do, a calculator for everyone to use.
